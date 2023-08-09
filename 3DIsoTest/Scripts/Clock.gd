@@ -2,26 +2,28 @@ extends Node
 
 @onready var timer_group = get_parent().get_node("Timers")
 
-var time : float = 0.0
-var object = null
-var method : String = ""
-var args : Array = []
-
-
-func repeat(_time : float, _object : Node, _method : String, _args : Array):
+func wait(time : float, object : Node, method : String, args : Array) -> int:
+	if time <= 0.0:
+		object.callv(method, args)
+		return 555
+		
 	var timer = Timer.new()
 	timer_group.add_child(timer)
-	timer.wait_time = _time  # Use the passed _time instead of the class variable time
-	timer.one_shot = false
+	
+	timer.one_shot = true
 	timer.paused = false
 	timer.autostart = false
+	timer.wait_time = time
 	
-	# Connect the signal with the required arguments
-	var timeout_callable : Callable = Callable(self, "on_repeating_timer_timeout").bindv([timer, _object, _method, _args])
-	timer.connect("timeout", timeout_callable)
+	if method != "":
+		var callback_callable : Callable = Callable(self, "on_waiting_timer_timeout").bindv([timer, object, method, args])
+		#callback_callable.bindv([timer, object, method, args])
+		timer.connect("timeout", callback_callable)
 	
 	timer.start()
+	return timer.get_instance_id()
 
 
-func on_repeating_timer_timeout(_timer : Node, _object : Node, _method : String, _args : Array):
-	_object.callv(_method, _args)
+func on_waiting_timer_timeout(timer : Node, object : Node, method : String, args : Array) -> void:
+	object.callv(method, args)
+	timer.queue_free()

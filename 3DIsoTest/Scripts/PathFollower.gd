@@ -1,8 +1,9 @@
 extends PathFollow3D
 
 @export var duration = 4.0
-@export var desired_progress = 1.0
-@export var complete_margin = 0.1
+@export var end_acceptance = 0.1
+
+var desired_progress : float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,13 +11,16 @@ func _ready():
 	pass
 	
 
-func _process(delta):
+func _physics_process(delta):
 	var tween : Tween = create_tween()
-	#var callback_callable : Callable = Callable(self, follow_path())
-	#tween.finished.connect(callback_callable)
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.set_ease(Tween.EASE_IN)
 	
-	if progress_ratio >= desired_progress - complete_margin:
-		#print("Hello")
-		progress_ratio = 0.0
-		#tween.tween_property(self, "progress_ratio", desired_progress, duration)
+	#print(str(progress_ratio))
+	var progress_margin = desired_progress - end_acceptance if desired_progress == 1 else end_acceptance
+	if progress_ratio < progress_margin:
+		desired_progress = 1.0
+	else:
+		desired_progress = 0.0
+		
 	tween.tween_property(self, "progress_ratio", desired_progress, duration)

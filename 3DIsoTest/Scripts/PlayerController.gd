@@ -9,7 +9,7 @@ extends CharacterBody3D
 var horizontal_input : float = 0.0
 var vertical_input : float = 0.0
 
-const MOVE_SPEED : float = 13.0
+const MOVE_SPEED : float = 10.0
 const GRAVITY : float = 50.0
 const FIRE_INTERVAL : float = 0.4
 const DOWNWARD_FORCE : float = 5
@@ -17,17 +17,19 @@ const JUMP_FORCE : float = 25
 
 const BULLET_SHOOT_VELOCITY : float = 26.0
 
-var looking_position : Vector3 = Vector3.ZERO
+var can_shoot : bool = true
+
+var facing_position : Vector3 = Vector3.ZERO
 
 
 func _ready():
-	clock.repeat(FIRE_INTERVAL, self, "handle_shooting", [])
-
+	#clock.repeat(FIRE_INTERVAL, self, "handle_shooting", [])
+	pass
 
 func _physics_process(delta):
 	handle_input()
 	handle_movement()
-	#handle_shooting()
+	handle_shooting()
 	
 	velocity.y -= DOWNWARD_FORCE * delta
 	rotate_to_mouse_position()
@@ -51,16 +53,23 @@ func handle_jump():
 
 func handle_movement():
 	var fall_speed : float = velocity.y
-	var fall_direction : Vector3 = Vector3.UP * fall_speed
-	velocity = Vector3(horizontal_input, 0.0, vertical_input).normalized() * MOVE_SPEED + fall_direction
+	var fall_vector : Vector3 = Vector3.UP * fall_speed
+	velocity = Vector3(horizontal_input, 0.0, vertical_input).normalized() * MOVE_SPEED + fall_vector
 
 
 func handle_shooting():
+	if !can_shoot: return
 	if Input.is_action_pressed("fire"):
-		var bullet : RigidBody3D = bullet_scene.instantiate()
-		get_parent().add_child(bullet)
-		bullet.position = fire_point.global_position
-		bullet.linear_velocity = (looking_position - position).normalized() * BULLET_SHOOT_VELOCITY + velocity
+		fire_bullet()
+		can_shoot = false
+		clock.wait(FIRE_INTERVAL, self, "set", ["can_shoot", true])
+
+
+func fire_bullet() -> void:
+	var bullet : RigidBody3D = bullet_scene.instantiate()
+	get_parent().add_child(bullet)
+	bullet.position = fire_point.global_position
+	bullet.linear_velocity = (facing_position - position).normalized() * BULLET_SHOOT_VELOCITY + velocity
 
 
 func rotate_to_mouse_position():
@@ -76,7 +85,7 @@ func rotate_to_mouse_position():
 	
 	var ray_hit = space.intersect_ray(ray_parameters)
 	
-	looking_position = ray_hit["position"]
+	facing_position = ray_hit["position"]
 	
 	look_at(ray_hit["position"])
 	rotation = rotation * Vector3.UP
