@@ -1,14 +1,15 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0py6qobdc0r4"]
 
-[ext_resource type="Texture2D" uid="uid://blyvm3nschn06" path="res://Textures/PNG/Light/texture_07.png" id="1_er1ns"]
+[ext_resource type="Texture2D" uid="uid://bwg4mi24v1prg" path="res://Textures/PNG/Light/texture_08.png" id="1_yv81x"]
 
 [resource]
 albedo_color = Color(0, 0.670588, 0.176471, 1)
-albedo_texture = ExtResource("1_er1ns")
+albedo_texture = ExtResource("1_yv81x")
 emission = Color(0.823529, 0.180392, 0, 1)
 emission_energy_multiplier = 11.67
 subsurf_scatter_strength = 0.9
 refraction_scale = -0.11
-uv1_scale = Vector3(2.085, 2.085, 2.085)
+uv1_scale = Vector3(6.17, 3.955, 3.955)
+uv1_offset = Vector3(0, 33, 0)
 uv1_triplanar_sharpness = 21.8566
 proximity_fade_distance = 42.37
