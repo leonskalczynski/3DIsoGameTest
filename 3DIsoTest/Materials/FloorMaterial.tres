@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bygsmim055mj"]
-
-[ext_resource type="Texture2D" uid="uid://b0kqyyed3g2jh" path="res://Textures/PNG/Dark/texture_02.png" id="1_idjrd"]
-
-[resource]
-albedo_texture = ExtResource("1_idjrd")
-subsurf_scatter_strength = 0.9
-uv1_scale = Vector3(75, 75, 75)
