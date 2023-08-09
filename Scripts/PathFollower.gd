@@ -1,22 +1,27 @@
-extends PathFollow3D
+extends StaticBody3D
 
-@export var duration = 4.0
-@export var desired_progress = 1.0
-@export var complete_margin = 0.1
+@export var player : Node3D
+@onready var body_detector : Area3D = get_node("BodyDetector")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#follow_path()
-	pass
+@export var duration : float = 4.0
+@export var path_follow : PathFollow3D
+
+
+@export var desired_locations : Array[float] = [0.0, 1.0]
+var current_location : float = 0
+
+
+func _on_body_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	print(str(body.name))
+	if body != player: return
 	
-
-func _process(delta):
+	var next_location : float = desired_locations.find(current_location) + 1
+	if next_location >= desired_locations.size():
+		next_location = 0
+	print(str(next_location))
+	
 	var tween : Tween = create_tween()
-	#var callback_callable : Callable = Callable(self, follow_path())
-	#tween.finished.connect(callback_callable)
-	
-	if progress_ratio >= desired_progress - complete_margin:
-		#print("Hello")
-		progress_ratio = 0.0
-		#tween.tween_property(self, "progress_ratio", desired_progress, duration)
-	tween.tween_property(self, "progress_ratio", desired_progress, duration)
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(path_follow, "progress_ratio", desired_locations[next_location], duration)
+	current_location = next_location
