@@ -1,22 +1,37 @@
-[gd_scene load_steps=5 format=3 uid="uid://0a6jxjtrn6nq"]
+[gd_scene load_steps=7 format=3 uid="uid://0a6jxjtrn6nq"]
 
 [ext_resource type="Material" uid="uid://b0py6qobdc0r4" path="res://Materials/MovingPlatformMaterial.tres" id="1_bgohj"]
+[ext_resource type="Script" path="res://Scripts/PathFollower.gd" id="1_ycypd"]
 [ext_resource type="Material" uid="uid://318621lnndks" path="res://Materials/CubeMaterial.tres" id="2_tyjuo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_87g7g"]
+size = Vector3(1, 0.15, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_e0ial"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_te4fg"]
+size = Vector3(2, 0.338, 2)
+
 [node name="MovingCube" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.255, 0, 0, 0, 1, 0, 0, 0)
 disable_mode = 1
+script = ExtResource("1_ycypd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("BoxShape3D_87g7g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+transform = Transform3D(2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0)
 material_override = ExtResource("1_bgohj")
 mesh = SubResource("BoxMesh_e0ial")
 surface_material_override/0 = ExtResource("2_tyjuo")
+
+[node name="BodyDetector" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.248916, 0)
+shape = SubResource("BoxShape3D_te4fg")
+
+[connection signal="body_shape_entered" from="BodyDetector" to="." method="_on_body_detector_body_shape_entered"]

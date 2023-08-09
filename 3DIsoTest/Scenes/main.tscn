@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhv8a21vj7kw7"]
+[gd_scene load_steps=17 format=3 uid="uid://dhv8a21vj7kw7"]
 
 [ext_resource type="Environment" uid="uid://bobrs1g7evum4" path="res://Environments/environment.tres" id="1_c1qyj"]
 [ext_resource type="Material" uid="uid://bygsmim055mj" path="res://Materials/FloorMaterial.tres" id="1_n4wsa"]
@@ -8,7 +8,6 @@
 [ext_resource type="Material" uid="uid://dku0i43yqqeox" path="res://Materials/HeadMaterial.tres" id="4_y3a1w"]
 [ext_resource type="Material" uid="uid://btiipn4n3uegk" path="res://Materials/PlayerMaterial.tres" id="5_lya3l"]
 [ext_resource type="Script" path="res://Scripts/Clock.gd" id="7_w2xij"]
-[ext_resource type="Script" path="res://Scripts/PathFollower.gd" id="9_4d2i8"]
 [ext_resource type="PackedScene" uid="uid://0a6jxjtrn6nq" path="res://Scenes/moving_cube.tscn" id="9_5iqb6"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fy3xt"]
@@ -24,7 +23,7 @@ height = 1.84745
 
 [sub_resource type="Curve3D" id="Curve3D_v3m1i"]
 _data = {
-"points": PackedVector3Array(2.22694, -4.61855, 0.56405, 0, 0, 0, 0, -0.525, 0, 0, 0, 0, 0, 0, 0, 0, 7.035, 0),
+"points": PackedVector3Array(2.22694, -4.61855, 0.56405, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.035, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -47,7 +46,6 @@ script = ExtResource("7_w2xij")
 environment = ExtResource("1_c1qyj")
 
 [node name="CameraStick" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_y0dau")
 
 [node name="Camera3D" type="Camera3D" parent="CameraStick"]
@@ -58,6 +56,8 @@ size = 15.521
 
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.72085, 1.10147, 6.08134)
+collision_layer = 5
+collision_mask = 5
 slide_on_ceiling = false
 script = ExtResource("3_ct6u0")
 
@@ -85,7 +85,6 @@ shape = SubResource("WorldBoundaryShape3D_k53av")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32798, -0.712753)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_rq436")
 metadata/_edit_lock_ = true
 
@@ -153,22 +152,21 @@ curve = SubResource("Curve3D_v3m1i")
 [node name="PathFollow3D" type="PathFollow3D" parent="Map/Path3D"]
 rotation_mode = 0
 tilt_enabled = false
-script = ExtResource("9_4d2i8")
-duration = 2.0
-end_acceptance = 0.05
 
-[node name="MovingCube" parent="Map/Path3D/PathFollow3D" instance=ExtResource("9_5iqb6")]
+[node name="MovingCube" parent="Map/Path3D/PathFollow3D" node_paths=PackedStringArray("player", "path_follow") instance=ExtResource("9_5iqb6")]
+player = NodePath("../../../../Player")
+duration = 3.0
+path_follow = NodePath("..")
 
 [node name="Path3D2" type="Path3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8087, 7.9255, 17.76)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8087, 8.35654, 17.76)
 curve = SubResource("Curve3D_qhk6g")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Map/Path3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.4)
-progress = 11.4
 rotation_mode = 0
 tilt_enabled = false
-script = ExtResource("9_4d2i8")
-end_acceptance = 0.02
 
-[node name="MovingCube" parent="Map/Path3D2/PathFollow3D" instance=ExtResource("9_5iqb6")]
+[node name="MovingCube" parent="Map/Path3D2/PathFollow3D" node_paths=PackedStringArray("player", "path_follow") instance=ExtResource("9_5iqb6")]
+player = NodePath("../../../../Player")
+duration = 3.0
+path_follow = NodePath("..")
