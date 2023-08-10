@@ -10,7 +10,7 @@ size = Vector3(1, 0.15, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_e0ial"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_te4fg"]
-size = Vector3(2, 0.338, 2)
+size = Vector3(1.5, 0.93, 1.5)
 
 [node name="MovingCube" type="StaticBody3D"]
 disable_mode = 1
@@ -31,7 +31,8 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.248916, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529605, 0)
 shape = SubResource("BoxShape3D_te4fg")
 
 [connection signal="body_shape_entered" from="BodyDetector" to="." method="_on_body_detector_body_shape_entered"]
+[connection signal="body_shape_exited" from="BodyDetector" to="." method="_on_body_detector_body_shape_exited"]
