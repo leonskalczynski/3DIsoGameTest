@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dhv8a21vj7kw7"]
+[gd_scene load_steps=19 format=3 uid="uid://dhv8a21vj7kw7"]
 
 [ext_resource type="Environment" uid="uid://bobrs1g7evum4" path="res://Environments/environment.tres" id="1_c1qyj"]
 [ext_resource type="Material" uid="uid://bygsmim055mj" path="res://Materials/FloorMaterial.tres" id="1_n4wsa"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://0a6jxjtrn6nq" path="res://Scenes/moving_platform.tscn" id="9_5iqb6"]
 [ext_resource type="PackedScene" uid="uid://bmpty7rj7fy0u" path="res://Scenes/door.tscn" id="10_27hy8"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="11_4pasr"]
+[ext_resource type="PackedScene" uid="uid://ukgcquvcfbc3" path="res://Scenes/pickable_item.tscn" id="11_ehxhx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fy3xt"]
 
@@ -52,7 +53,6 @@ size = 15.521
 [node name="Player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.72085, 1.10147, 6.08134)
 collision_layer = 5
-collision_mask = 5
 slide_on_ceiling = false
 script = ExtResource("3_ct6u0")
 
@@ -170,6 +170,12 @@ duration = 0.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4053, 1.19948, 10.2061)
 curve = SubResource("Curve3D_sp4qy")
 desired_locations = Array[float]([0.0, 0.56, 1.0])
+
+[node name="PickableItem" parent="Map" instance=ExtResource("11_ehxhx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.175, 1, 19.304)
+
+[node name="PickableItem2" parent="Map" instance=ExtResource("11_ehxhx")]
+transform = Transform3D(0.116047, 0, -0.993244, 0, 1, 0, 0.993244, 0, 0.116047, 17.6626, 1, 1.35773)
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

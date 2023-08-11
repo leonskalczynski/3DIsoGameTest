@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ukgcquvcfbc3"]
+
+[ext_resource type="Script" path="res://Scripts/PickableItem.gd" id="1_q2dft"]
+[ext_resource type="ArrayMesh" uid="uid://d2a8qffi0g5bu" path="res://Models/Turkey/turkey.obj" id="2_5xsyk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_grtvk"]
+size = Vector3(5.5, 3, 5.5)
+
+[node name="PickableItem" type="Node3D"]
+script = ExtResource("1_q2dft")
+
+[node name="Item" type="Node3D" parent="."]
+transform = Transform3D(-0.946452, 0, -0.322844, 0, 1, 0, 0.322844, 0, -0.946452, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Item"]
+transform = Transform3D(1.48, 0, 0, 0, 1.48, 0, 0, 0, 1.48, 0, 0, 0)
+mesh = ExtResource("2_5xsyk")
+
+[node name="BodyDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyDetector"]
+shape = SubResource("BoxShape3D_grtvk")
+
+[connection signal="body_shape_entered" from="BodyDetector" to="." method="_on_body_detector_body_shape_entered"]
+[connection signal="body_shape_exited" from="BodyDetector" to="." method="_on_body_detector_body_shape_exited"]
