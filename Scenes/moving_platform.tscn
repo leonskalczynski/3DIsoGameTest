@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://0a6jxjtrn6nq"]
+
+[ext_resource type="Script" path="res://Scripts/MovingPlatform.gd" id="1_3gfsb"]
+[ext_resource type="Material" uid="uid://b0py6qobdc0r4" path="res://Materials/MovingPlatformMaterial.tres" id="1_bgohj"]
+[ext_resource type="Material" uid="uid://318621lnndks" path="res://Materials/CubeMaterial.tres" id="2_tyjuo"]
+
+[sub_resource type="Curve3D" id="Curve3D_flcxk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_87g7g"]
+size = Vector3(1, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e0ial"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_te4fg"]
+size = Vector3(1.5, 0.93, 1.5)
+
+[node name="MovingPlatform" type="Path3D"]
+curve = SubResource("Curve3D_flcxk")
+script = ExtResource("1_3gfsb")
+duration = 2.0
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+rotation_mode = 0
+tilt_enabled = false
+
+[node name="MovingBlock" type="StaticBody3D" parent="PathFollow3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PathFollow3D/MovingBlock"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_87g7g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PathFollow3D/MovingBlock"]
+transform = Transform3D(2, 0, 0, 0, 0.3, 0, 0, 0, 2, 0, 0, 0)
+material_override = ExtResource("1_bgohj")
+mesh = SubResource("BoxMesh_e0ial")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("2_tyjuo")
+
+[node name="BodyDetector" type="Area3D" parent="PathFollow3D/MovingBlock"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PathFollow3D/MovingBlock/BodyDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.529605, 0)
+shape = SubResource("BoxShape3D_te4fg")
+
+[connection signal="body_shape_entered" from="PathFollow3D/MovingBlock/BodyDetector" to="." method="_on_body_detector_body_shape_entered"]
+[connection signal="body_shape_exited" from="PathFollow3D/MovingBlock/BodyDetector" to="." method="_on_body_detector_body_shape_exited"]

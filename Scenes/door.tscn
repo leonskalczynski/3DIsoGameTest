@@ -15,18 +15,18 @@ transform = Transform3D(3.25, 0, 0, 0, 3.25, 0, 0, 0, 3.25, 0, 0, 0)
 script = ExtResource("1_4lb38")
 
 [node name="TurningPoint" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, -0.0499432)
+
+[node name="Marker3D" type="Marker3D" parent="TurningPoint"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TurningPoint"]
-transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.35, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.35, 0, 0.0499432)
 mesh = SubResource("BoxMesh_sl5jl")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TurningPoint"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0.0499432)
 shape = SubResource("BoxShape3D_0tblm")
-
-[node name="Marker3D" type="Marker3D" parent="TurningPoint"]
 
 [node name="BodyDetector" type="Area3D" parent="."]
 collision_layer = 0

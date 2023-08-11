@@ -14,7 +14,7 @@ var current_rotation : float = 0
 var bodies : Array[Node3D] = []
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_just_pressed("interact"):
 		if player in bodies:
 			turn_door()
@@ -32,14 +32,14 @@ func turn_door():
 	current_rotation = next_rotation
 
 
-func _on_body_detector_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_body_detector_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	if body not in bodies:
 		bodies.append(body)
 		if body == player:
 			ui.display_interact_text()
 
 
-func _on_body_detector_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
+func _on_body_detector_body_shape_exited(_body_rid, body, _body_shape_index, _local_shape_index):
 	bodies.erase(body)
 	if body == player:
 		ui.hide_interact_text()

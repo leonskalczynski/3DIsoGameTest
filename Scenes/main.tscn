@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dhv8a21vj7kw7"]
+[gd_scene load_steps=18 format=3 uid="uid://dhv8a21vj7kw7"]
 
 [ext_resource type="Environment" uid="uid://bobrs1g7evum4" path="res://Environments/environment.tres" id="1_c1qyj"]
 [ext_resource type="Material" uid="uid://bygsmim055mj" path="res://Materials/FloorMaterial.tres" id="1_n4wsa"]
@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://dku0i43yqqeox" path="res://Materials/HeadMaterial.tres" id="4_y3a1w"]
 [ext_resource type="Material" uid="uid://btiipn4n3uegk" path="res://Materials/PlayerMaterial.tres" id="5_lya3l"]
 [ext_resource type="Script" path="res://Scripts/Clock.gd" id="7_w2xij"]
-[ext_resource type="PackedScene" uid="uid://0a6jxjtrn6nq" path="res://Scenes/moving_cube.tscn" id="9_5iqb6"]
+[ext_resource type="PackedScene" uid="uid://0a6jxjtrn6nq" path="res://Scenes/moving_platform.tscn" id="9_5iqb6"]
 [ext_resource type="PackedScene" uid="uid://bmpty7rj7fy0u" path="res://Scenes/door.tscn" id="10_27hy8"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="11_4pasr"]
 
@@ -23,23 +23,9 @@ height = 1.84745
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j5eym"]
 
-[sub_resource type="Curve3D" id="Curve3D_v3m1i"]
+[sub_resource type="Curve3D" id="Curve3D_sp4qy"]
 _data = {
-"points": PackedVector3Array(2.22694, -4.61855, 0.56405, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.255, 0),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_qf4ve"]
-_data = {
-"points": PackedVector3Array(2.22694, -4.61855, 0.56405, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.95, 0),
-"tilts": PackedFloat32Array(0, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve3D" id="Curve3D_qhk6g"]
-_data = {
-"points": PackedVector3Array(2.22694, -4.61855, 0.56405, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11.57),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12.495, 0),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -122,13 +108,13 @@ shape = SubResource("WorldBoundaryShape3D_k53av")
 transform = Transform3D(2.94422, 0, 0, 0, 3.01069, 0, 0, 0, 3.01069, 9, 1, -3)
 
 [node name="Cube11" parent="Map" instance=ExtResource("3_uta5k")]
-transform = Transform3D(2.34354, 0, 0, 0, 3.79223, 0, 0, 0, 2.39644, 15.7075, 1, 14.301)
+transform = Transform3D(2.34354, 0, 0, 0, 3.79223, 0, 0, 0, 2.39644, 24.294, 1, 6.64121)
 
 [node name="Cube13" parent="Map" instance=ExtResource("3_uta5k")]
-transform = Transform3D(2.34354, 0, 0, 0, 6.47433, 0, 0, 0, 2.39644, 20.3687, 1, 14.301)
+transform = Transform3D(2.34354, 0, 0, 0, 6.47433, 0, 0, 0, 2.39644, 28.9552, 1, 6.64121)
 
 [node name="Cube12" parent="Map" instance=ExtResource("3_uta5k")]
-transform = Transform3D(2.36062, 0, 0, 0, 3.79223, 0, 0, 0, 1.20427, 15.667, 1, 31.6237)
+transform = Transform3D(2.36062, 0, 0, 0, 3.79223, 0, 0, 0, 1.20427, 28.935, 1, 10.2272)
 
 [node name="Cube4" parent="Map" instance=ExtResource("3_uta5k")]
 transform = Transform3D(2.93752, 0, 0, 0, 2.86053, 0, 0, 0, 2.44377, -10.0087, 1, -3)
@@ -137,10 +123,22 @@ transform = Transform3D(2.93752, 0, 0, 0, 2.86053, 0, 0, 0, 2.44377, -10.0087, 1
 transform = Transform3D(2.93752, 0, 0, 0, 1.68338, 0, 0, 0, 4.52568, -10.0087, 1, 3.46916)
 
 [node name="Cube5" parent="Map" instance=ExtResource("3_uta5k")]
-transform = Transform3D(0.471592, 0, 0, 0, 1.707, 0, 0, 0, 1.74325, 10.1182, 1, 7.29867)
+transform = Transform3D(0.471592, 0, 0, 0, 1.707, 0, 0, 0, 1.74325, 10.1182, 1, 7.30716)
+
+[node name="Cube16" parent="Map" instance=ExtResource("3_uta5k")]
+transform = Transform3D(0.471591, 0, 0, 0, 1.707, 0, 0, 0, 5.56437, 22.4686, 1, 2.74431)
+
+[node name="Cube15" parent="Map" instance=ExtResource("3_uta5k")]
+transform = Transform3D(-2.06139e-08, 0, -5.96611, 0, 1.707, 0, 0.471591, 0, -2.60787e-07, 16.2207, 1, -2.35389)
+
+[node name="Cube17" parent="Map" instance=ExtResource("3_uta5k")]
+transform = Transform3D(-2.06139e-08, 0, -2.76767, 0, 1.707, 0, 0.471591, 0, -1.20979e-07, 12.7045, 1, 8.57997)
+
+[node name="Cube18" parent="Map" instance=ExtResource("3_uta5k")]
+transform = Transform3D(-2.06139e-08, 0, -2.35533, 0, 1.707, 0, 0.471591, 0, -1.02955e-07, 20.2854, 1, 8.57998)
 
 [node name="Cube14" parent="Map" instance=ExtResource("3_uta5k")]
-transform = Transform3D(0.471592, 0, 0, 0, 1.707, 0, 0, 0, 1.74325, 10.1182, 1, 1.43516)
+transform = Transform3D(0.471592, 0, 0, 0, 1.707, 0, 0, 0, 1.74325, 10.1182, 1, 1.40181)
 
 [node name="Cube2" parent="Map" instance=ExtResource("3_uta5k")]
 transform = Transform3D(1.80641, 0, 0, 0, 2.18082, 0, 0, 0, 1.80641, 9, 7.02137, -3)
@@ -160,45 +158,18 @@ transform = Transform3D(1, 0, 0, 0, 0.793392, 0, 0, 0, 3.20003, 4.39243, 1, 18.4
 [node name="Cube7" parent="Map" instance=ExtResource("3_uta5k")]
 transform = Transform3D(-5.96046e-08, 0, -3.20003, 0, 0.793392, 0, 1, 0, 0, 4.39243, 1, 18.4288)
 
-[node name="Path3D" type="Path3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2792, 1.15246, 15.4981)
-curve = SubResource("Curve3D_v3m1i")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Map/Path3D"]
-rotation_mode = 0
-tilt_enabled = false
-
-[node name="MovingCube" parent="Map/Path3D/PathFollow3D" node_paths=PackedStringArray("path_follow") instance=ExtResource("9_5iqb6")]
-duration = 2.0
-path_follow = NodePath("..")
-
-[node name="Path3D3" type="Path3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9633, 8.8163, 13.0944)
-curve = SubResource("Curve3D_qf4ve")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Map/Path3D3"]
-rotation_mode = 0
-tilt_enabled = false
-
-[node name="MovingCube" parent="Map/Path3D3/PathFollow3D" node_paths=PackedStringArray("path_follow") instance=ExtResource("9_5iqb6")]
-duration = 2.0
-path_follow = NodePath("..")
-
-[node name="Path3D2" type="Path3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8121, 8.35654, 17.7972)
-curve = SubResource("Curve3D_qhk6g")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Map/Path3D2"]
-rotation_mode = 0
-tilt_enabled = false
-
-[node name="MovingCube" parent="Map/Path3D2/PathFollow3D" node_paths=PackedStringArray("path_follow") instance=ExtResource("9_5iqb6")]
-duration = 3.0
-path_follow = NodePath("..")
-
 [node name="Door" parent="Map" instance=ExtResource("10_27hy8")]
 transform = Transform3D(4.26186e-07, 0, -3.25, 0, 3.25, 0, 3.25, 0, 4.26186e-07, 10.1139, 2.6813, 4.36346)
 duration = 0.7
+
+[node name="Door2" parent="Map" instance=ExtResource("10_27hy8")]
+transform = Transform3D(-3.25, 0, -4.90736e-07, 0, 3.25, 0, 4.90736e-07, 0, -3.25, 16.6944, 2.6813, 8.61902)
+duration = 0.7
+
+[node name="MovingPlatform" parent="Map" instance=ExtResource("9_5iqb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4053, 1.19948, 10.2061)
+curve = SubResource("Curve3D_sp4qy")
+desired_locations = Array[float]([0.0, 0.56, 1.0])
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
