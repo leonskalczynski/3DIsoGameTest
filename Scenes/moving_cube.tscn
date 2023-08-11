@@ -27,7 +27,7 @@ mesh = SubResource("BoxMesh_e0ial")
 surface_material_override/0 = ExtResource("2_tyjuo")
 
 [node name="BodyDetector" type="Area3D" parent="."]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BodyDetector"]

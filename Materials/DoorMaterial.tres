@@ -1,0 +1,4 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://rg8pnfnqwn0h"]
+
+[resource]
+subsurf_scatter_strength = 0.9

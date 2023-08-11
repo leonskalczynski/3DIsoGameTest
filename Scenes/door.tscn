@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmpty7rj7fy0u"]
+
+[ext_resource type="Script" path="res://Scripts/Door.gd" id="1_4lb38"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sl5jl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0tblm"]
+size = Vector3(0.7, 1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_axgq6"]
+size = Vector3(0.753, 1, 2.44)
+
+[node name="Door" type="Node3D"]
+transform = Transform3D(3.25, 0, 0, 0, 3.25, 0, 0, 0, 3.25, 0, 0, 0)
+script = ExtResource("1_4lb38")
+
+[node name="TurningPoint" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TurningPoint"]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.35, 0, 0)
+mesh = SubResource("BoxMesh_sl5jl")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurningPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0)
+shape = SubResource("BoxShape3D_0tblm")
+
+[node name="Marker3D" type="Marker3D" parent="TurningPoint"]
+
+[node name="BodyDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyDetector"]
+shape = SubResource("BoxShape3D_axgq6")
+
+[connection signal="body_shape_entered" from="BodyDetector" to="." method="_on_body_detector_body_shape_entered"]
+[connection signal="body_shape_exited" from="BodyDetector" to="." method="_on_body_detector_body_shape_exited"]
