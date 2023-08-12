@@ -19,3 +19,4 @@ Cosas que faltan por hacer/ planeadas:
   - Puntos de Armadura, Ropa ( Solo guardar su informacion en codigo, no hace falta representarlos visualmente en el juego)
   - Mas tipos de objetos ( por ahora comida, amunicion, armas, quizas: {ropa, armadura})
   - Equipacion de Armadura, Ropa.
+  - Puertas con llaves
