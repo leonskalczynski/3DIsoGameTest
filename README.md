@@ -11,7 +11,7 @@ Cosas ya hechas/ probadas:
 
 Cosas que faltan por hacer/ planeadas:
   - Inventario + peso de las cosas
-  - Enemigos ( Sistema de aparicion y IA)
+  - Enemigos ( Sistema de aparicion e IA)
   - Cofres
   - Escaleras
   - Terreno ( Hace falta el Plugin Terrain3D para Godot)
